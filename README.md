@@ -5,6 +5,7 @@ Use `npm run test` to fire up a nodemon server for development
 
 
 ## Project folder structure
+```
 ├── README.md 
 ├── index.html  
 ├── package-lock.json
@@ -20,3 +21,4 @@ Use `npm run test` to fire up a nodemon server for development
 │   └── preprocess.py　
 └── summarizer
     └── summarizer.js　
+```
