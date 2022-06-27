@@ -1,0 +1,22 @@
+{
+  "name": "youwa",
+  "version": "1.0.0",
+  "description": "A text-summarization web application specially built for unspecialized readers of contract",
+  "main": "server.js",
+  "scripts": {
+    "test": "npx nodemon server.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "contract",
+    "text-summarization"
+  ],
+  "author": "Mike Chen, Kaito Taguchi, Takehiro Sanoki",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.18"
+  }
+}
