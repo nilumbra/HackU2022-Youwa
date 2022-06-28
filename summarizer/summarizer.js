@@ -2,6 +2,7 @@ const path = require('path');
 const { spawn } = require('node:child_process');
 
 const log = console.log;
+
 /**
  * Preprocess text with another python subprocess, and do something with 
  * <stdout>. 
@@ -48,6 +49,7 @@ async function preprocess_text(raw_text) {
     })
 
     // pipe in <raw_text> for preprocess
+    preprocessWorker.stdin.setEncoding('utf8');
     preprocessWorker.stdin.write(raw_text);
     preprocessWorker.stdin.end();
   })   
