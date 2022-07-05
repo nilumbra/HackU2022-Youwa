@@ -13,21 +13,16 @@ const log = console.log;
  * serverless services(e.g. a call to AWS Lambda URL), which returns a Promise, 
  * and the callback function will be executed in a .then() clause.
  * 
- * @param {string} raw_text - the text to be processed, for MVP0, this is expected to be a Japanese contract document
- * @return {Promise} - resolve to the preprocessed text
+ * @param {string} text - the text to be processed, for MVP0, this is expected to be a Japanese contract document
+ * @return {Promise} - resolve to preprocessed text
  */
 async function preprocess_text(raw_text) {
   // Call the scritp
-  const pyargs = [
+  const args = [
     path.join(__dirname, '../serverless/preprocess.py')
   ]
 
-  const rubyargs = [
-                    path.join(__dirname, '../serverless/contract-peg-parser/main.rb')
-                  ]
-
-  // const preprocessWorker = spawn('python3', args);
-  const preprocessWorker = spawn('ruby', rubyargs);
+  const preprocessWorker = spawn('python', args);
 
   return new Promise((resolve, reject) => {
     var res = [];
