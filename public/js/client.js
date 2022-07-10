@@ -29,6 +29,10 @@ xhr.onreadystatechange = function() {
 
 document.addEventListener('DOMContentLoaded', function() {
   var form = document.getElementById('input');
+  var submitBtn = document.getElementById('submit');
+  submitBtn.addEventListener('click', () => {
+    form.submit();
+  })
 
   // XHRHttpRequest.send() on submit
   form.addEventListener('submit', function(e){
