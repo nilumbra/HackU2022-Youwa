@@ -9,7 +9,7 @@ body {
 }
 h1 {
     font-size: 96px;
-    font-weight:900;
+    font-weight: 900;
 }
 li {
     display: inline;
@@ -43,12 +43,12 @@ textarea {
     height: 520px;
     border-radius: 40px;
     background-color: #f7f7f7;
-    border: 3px solid #fff;
+    border: 3px solid #ccc;
     padding: 24px;
 }
-textarea:hover {
+/*textarea:hover {
     border: 3px solid #ccc;
-}
+}*/
 textarea:focus {
     border: 3px solid lightblue;
 }
@@ -76,4 +76,7 @@ textarea:focus {
     background-color: black;
     color: white;
     text-align: center;
+}
+.btn :hover {
+    background-color: rgb(56, 56, 56);
 }
