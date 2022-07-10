@@ -7,33 +7,41 @@
 	<link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-	<form id="input" method="POST" action="/post">
-		<!-- overflow-y:hidden -->
-		<label for="contractType">契約書の種類を選んでください</label>
-		<select name="contractType" id="contractType">
-	    <option value="employ">雇用</option>
-	    <option value="contractor">請負</option>
-	    <option value="trade">売買</option>
-	    <option value="nondisclosure">秘密保持</option>
-	    <option value="engagement">委任</option>
-		</select><br><br>
+	<header>
+		<div class="headerTitle">
+			<h1>YOWA</h1>
+			<p>契約書を、かんたんに。</p>
+		</div>
+		<div class="headerMenu">
+			<li>要約</li>
+			<li>保存済み</li>
+			<li>設定</li>
+		</div>
+	</header>
 
-		<label for="contractText">本文</label><br>
-		<textarea id="contractText" name="contractText" rows="20" cols="100">
-		</textarea><br>
-		<!--  value="賃金:　三千円\n" --> 
-		<!--  placeholder="要約したい契約書をここに入力してください" -->
-		<button id="summarize">要約する</button>
-	</form>
-
-	<br>
-	<div>
-		要約文
-		<div id="summarized">
-
-		</div>	
-	</div>
-	
+	<main>
+		<div class="content">
+			<div class="inputArea">
+				<!-- <label for="contractType">契約書の種類を選んでください</label>
+				<select name="contractType" id="contractType">
+					<option value="employ">雇用</option>
+					<option value="contractor">請負</option>
+					<option value="trade">売買</option>
+					<option value="nondisclosure">秘密保持</option>
+					<option value="engagement">委任</option>
+				</select><br><br> -->
+				<form id="input" method="POST" action="/post">
+					<textarea id="contractText" name="contractText" placeholder="契約書テキストをここに入力" rows="24" cols="48"></textarea>
+				</form>
+			</div>
+			<div class="outputText">
+				<p id="summarized">Output will be showed here.</p>
+			</div>
+		</div>
+		<div class="btnParent">
+			<button id="summarize" type="button" class="btn">要約する</button>
+		</div>
+	</main>
 </body>
 
 <script src="/js/client.js"></script>
