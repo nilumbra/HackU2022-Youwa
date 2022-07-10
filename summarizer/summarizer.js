@@ -23,7 +23,7 @@ async function preprocess_text(raw_text) {
   ]
 
   const rubyargs = [
-                    path.join(__dirname, '../serverless/contract-peg-parser/main.rb')
+                    path.join(__dirname, '../serverless/contract-peg-parser-ruby/main.rb')
                   ]
 
   // const preprocessWorker = spawn('python3', args);
