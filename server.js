@@ -26,9 +26,9 @@ app.post('/post', (req, res) => {
   .then( // Mock preprocess text
     preprocessed => summarize(preprocessed)
   ) 
-  .then (summarizeed => {
-    log(summarizeed);
-    res.json(summarizeed)
+  .then (summarized => {
+    log(summarized);
+    res.json(summarized)
   })
   .catch(err => {
     log(err)

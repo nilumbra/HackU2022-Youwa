@@ -2,6 +2,7 @@ const path = require('path');
 const { spawn } = require('node:child_process');
 
 const log = console.log;
+
 /**
  * Preprocess text with another python subprocess, and do something with 
  * <stdout>. 
@@ -12,16 +13,21 @@ const log = console.log;
  * serverless services(e.g. a call to AWS Lambda URL), which returns a Promise, 
  * and the callback function will be executed in a .then() clause.
  * 
- * @param {string} text - the text to be processed, for MVP0, this is expected to be a Japanese contract document
- * @return {Promise} - resolve to preprocessed text
+ * @param {string} raw_text - the text to be processed, for MVP0, this is expected to be a Japanese contract document
+ * @return {Promise} - resolve to the preprocessed text
  */
 async function preprocess_text(raw_text) {
   // Call the scritp
-  const args = [
+  const pyargs = [
     path.join(__dirname, '../serverless/preprocess.py')
   ]
 
-  const preprocessWorker = spawn('python', args);
+  const rubyargs = [
+                    path.join(__dirname, '../serverless/contract-peg-parser-ruby/main.rb')
+                  ]
+
+  // const preprocessWorker = spawn('python3', args);
+  const preprocessWorker = spawn('ruby', rubyargs);
 
   return new Promise((resolve, reject) => {
     var res = [];
@@ -48,6 +54,7 @@ async function preprocess_text(raw_text) {
     })
 
     // pipe in <raw_text> for preprocess
+    preprocessWorker.stdin.setEncoding('utf8');
     preprocessWorker.stdin.write(raw_text);
     preprocessWorker.stdin.end();
   })   
