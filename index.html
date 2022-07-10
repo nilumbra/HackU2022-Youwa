@@ -21,16 +21,24 @@
 	<main>
 		<div class="content">
 			<div class="inputArea">
-				<form>
-					<textarea name="comment" placeholder="契約書テキストをここに入力" rows="24" cols="48"></textarea>
+				<form id="input" method="POST" action="/post">
+				<!-- <label for="contractType">契約書の種類を選んでください</label>
+				<select name="contractType" id="contractType">
+					<option value="employ">雇用</option>
+					<option value="contractor">請負</option>
+					<option value="trade">売買</option>
+					<option value="nondisclosure">秘密保持</option>
+					<option value="engagement">委任</option>
+				</select><br><br> -->
+					<textarea id="contractText" name="contractText" placeholder="契約書テキストをここに入力" rows="24" cols="48"></textarea>
 				</form>
 			</div>
 			<div class="outputText">
-				<p>Output will be showed here.</p>
+				<p id="summarized">Output will be showed here.</p>
 			</div>
 		</div>
 		<div class="btnParent">
-			<button type="button" class="btn">要約する</button>
+			<button id="submit" type="button" class="btn">要約する</button>
 		</div>
 	</main>
 </body>
