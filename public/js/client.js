@@ -97,19 +97,20 @@ xhr.onreadystatechange = function() {
 
 document.addEventListener('DOMContentLoaded', function() {
   var form = document.getElementById('input');
-  var submitBtn = document.getElementById('submit');
-  submitBtn.addEventListener('click', () => {
-    form.submit();
-  })
+  // var submitBtn = document.getElementById('submit');
+  // submitBtn.addEventListener('click', () => {
+  //   form.submit();
+  // })
 
   // XHRHttpRequest.send() on submit
   form.addEventListener('submit', function(e){
+    log('submit')
     e.preventDefault();  
 
     xhr.open("POST", this.getAttribute('action'));
 
     var obj = Object.fromEntries(new FormData(this)); 
-
+    log(obj)
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(obj));
   })
