@@ -1,5 +1,6 @@
 const path = require('path');
 const { spawn } = require('node:child_process');
+const { fs } = require('fs');
 
 const log = console.log;
 
@@ -50,7 +51,15 @@ async function preprocess_text(raw_text) {
     preprocessWorker.on('exit', () => {
         const result = res.join('');
         console.log(`Preprocessing terminates successfully :)\nResult:\n${result}`);
-        resolve(result)
+        resolve(result);
+        const toJSON = JSON.stringify(result);
+        console.log(toJSON)
+        fs.writeFileSync('../serverless/rubyoutput.json', toJSON, 'utf-8', (err) => {
+          if (err) throw (err);
+          if (!err) {
+            console.log('Json created.')
+          }
+        })
     })
 
     // pipe in <raw_text> for preprocess
@@ -59,7 +68,6 @@ async function preprocess_text(raw_text) {
     preprocessWorker.stdin.end();
   })   
 }
-
 
 /**
  * @param {Object} summarized
@@ -74,6 +82,15 @@ async function summarize(preprocessed) {
     }, 1000)   
   })
 }
+
+async function addFlag(flagged) {
+  const pyargs = [
+    path.join(__dirname, '../serverless/make_newjson.py')
+  ]
+
+  spawn('python3', pyargs);
+}
+
 
 module.exports = {
   preprocess_text,
