@@ -88,9 +88,8 @@ xhr.onreadystatechange = function() {
     // console.log(typeof(xhr.response))
     const summarizedData = JSON.parse(xhr.response);
     // console.log(typeof(summarizedData))
-    obj = summarizedData['summarized'];
-    // console.log(typeof(obj))
-    // console.log(JSON.stringify(obj, null, 2))
+    obj = JSON.parse(summarizedData['summarized']);
+    console.log(JSON.stringify(obj, null, 2));
     const summarizedTxt = JSON.stringify(obj, null, 2);
     summarized.textContent = summarizedTxt;
     alert('要約をご覧ください');
