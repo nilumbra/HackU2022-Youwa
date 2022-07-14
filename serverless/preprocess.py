@@ -7,7 +7,7 @@ import time
 # args = parser.parse_args()
 
 def main(lines):
-    time.sleep(1) # Simulate API call latency
+    #time.sleep(1) # Simulate API call latency
     for i, line in enumerate(lines):
         print(f'{i}: {line}', flush=True)
 

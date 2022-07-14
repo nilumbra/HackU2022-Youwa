@@ -3,7 +3,7 @@ const path = require('path');
 const express = require('express');
 
 const log = console.log;
-const { preprocess_text, summarize, addFlag } = require('./summarizer/summarizer');
+const { preprocess_text, summarize} = require('./summarizer/summarizer');
 
 const app = express();
 const PORT = process.env.PORT || 4321;
@@ -25,9 +25,6 @@ app.post('/post', (req, res) => {
   preprocess_text(contractText)
   .then( // Mock preprocess text
     preprocessed => summarize(preprocessed)
-  )
-  .then(
-    flagged => addFlag(flagged)
   )
   .then (summarized => {
     log(summarized);
