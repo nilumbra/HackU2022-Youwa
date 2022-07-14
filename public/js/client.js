@@ -85,10 +85,12 @@ xhr.onreadystatechange = function() {
   if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
     // Update #summarized view here
     const summarized = document.getElementById('summarized');
+    // console.log(typeof(xhr.response))
     const summarizedData = JSON.parse(xhr.response);
-    obj = JSON.parse(JSON.parse(summarizedData['summarized']));
-    console.log(obj)
-    console.log(JSON.stringify(obj, null, 2))
+    // console.log(typeof(summarizedData))
+    obj = summarizedData['summarized'];
+    // console.log(typeof(obj))
+    // console.log(JSON.stringify(obj, null, 2))
     const summarizedTxt = JSON.stringify(obj, null, 2);
     summarized.textContent = summarizedTxt;
     alert('要約をご覧ください');

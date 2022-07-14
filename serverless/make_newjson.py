@@ -10,7 +10,7 @@ def main():
     input_json = input()
     json_load = json.loads(input_json, object_pairs_hook=collections.OrderedDict)
     json_search(json_load)
-    print(json.dumps(json_load))
+    print(json.dumps(json_load, ensure_ascii=False))
 
     # with open(input_file, "r") as f:
     #     json_load = json.load(f, object_pairs_hook=collections.OrderedDict)

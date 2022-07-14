@@ -62,7 +62,7 @@ async function preprocess_text(raw_text) {
 
         // Pass parsed contract to addFlag for highlight marking
         addFlag_process.stdin.setEncoding('utf8');
-        addFlag_process.stdin.write(result); // Expects to be valid JSON
+        addFlag_process.stdin.write(JSON.parse(result)); // Expects to be valid JSON
         addFlag_process.stdin.end();
     })
 
