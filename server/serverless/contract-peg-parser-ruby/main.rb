@@ -1,5 +1,5 @@
-# puts($LOAD_PATH)
-$LOAD_PATH.unshift('/home/vagrant/youwa/serverless/contract-peg-parser-ruby/vendor/bundle/ruby/3.0.0/gems/parslet-1.8.2/lib')
+require 'pathname'
+$LOAD_PATH.unshift(Pathname.new(__dir__).join("vendor/bundle/ruby/3.0.0/gems/parslet-1.8.2/lib").to_s)
 $LOAD_PATH.unshift('/usr/share/rubygems-integration/all/gems/bundler-2.3.5/lib/gems/bundler-2.3.5/lib')
 # puts($LOAD_PATH)
 require 'bundler/setup'
