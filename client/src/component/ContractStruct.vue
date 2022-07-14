@@ -1,26 +1,49 @@
 <template>
-  <el-collapse v-model="activeNames" @change="handleChange">
-    <el-collapse-item title="Consistency" name="1">
-      <div>Consistent with real life: in line with the process and logic of real life, and comply with languages and habits that the users are used to;</div>
-      <div>Consistent within interface: all elements should be consistent, such as: design style, icons and texts, position of elements, etc.</div>
-    </el-collapse-item>
-    <el-collapse-item title="Feedback" name="2">
-      <div>Operation feedback: enable the users to clearly perceive their operations by style updates and interactive effects;</div>
-      <div>Visual feedback: reflect current state by updating or rearranging elements of the page.</div>
-    </el-collapse-item>
-    <el-collapse-item title="Efficiency" name="3">
-      <div>Simplify the process: keep operating process simple and intuitive;</div>
-      <div>Definite and clear: enunciate your intentions clearly so that the users can quickly understand and make decisions;</div>
-      <div>Easy to identify: the interface should be straightforward, which helps the users to identify and frees them from memorizing and recalling.</div>
-    </el-collapse-item>
-    <el-collapse-item title="Controllability" name="4">
-      <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
-      <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
-    </el-collapse-item>
-  </el-collapse>  
+  <div>
+    <h3>{{peg.title}}</h3>
+    <el-collapse v-model="activeNames" @change="handleChange">
+      <el-collapse-item title="前文" name="1">
+        {{peg.premises}}
+      </el-collapse-item>
+      <el-collapse-item title="Consistency" name="2">
+        <marked-text text="秘密保持契約書" :hlFlag="[0, 1]"></marked-text>
+      </el-collapse-item>
+      <el-collapse-item title="後文" name="10">
+        {{peg.closing}}
+      </el-collapse-item>
+      <el-collapse-item title="日付" name="11">
+        {{[peg.sign_date["year"], peg.sign_date["month"], peg.sign_date["day"]].join("")}}
+      </el-collapse-item>
+      <el-collapse-item title="署名(記名)　押印欄" name="12">
+        {{peg.signature}}
+      </el-collapse-item>
+    </el-collapse>  
+  </div>
+  
 </template>
 <script>
+  import MarkedText from './MarkedText.vue';
+
   export default {
+    components: {
+      MarkedText,
+    },
+    created(){
+      const log = console.log;
+      const peg = this.$store.state.contractPEGTree;
+      // use the data structure in $store.state.contractPEGTree
+      // Append el-collapse-item to the root node
+      // this.$el.appendChild(this.$refs.collapse.$el);
+      log(JSON.stringify(peg, null, 2));
+      for (const prop in peg) {
+        log(prop)
+      }
+    },
+    computed: {
+      peg() {
+        return this.$store.state.contractPEGTree
+      }
+    }, 
     data() {
       return {
         activeNames: ['1']
