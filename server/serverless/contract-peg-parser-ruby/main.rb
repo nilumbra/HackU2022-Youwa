@@ -150,8 +150,7 @@ class ContractParser < Parslet::Parser
   rule(:eof) { any.absent? }
 
   # 契約書全体
-  rule(:contract) { title >> premises >> (articles | chapters) >> closing? >> sign_date >> signature }
-  # rule(:contract) { title >> premises >> (articles | chapters) }
+  rule(:contract) { title >> premises >> (articles | chapters) >> closing? >> sign_date.maybe >> signature.maybe }
 
   root(:contract)
 end

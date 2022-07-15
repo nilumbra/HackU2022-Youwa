@@ -58,7 +58,8 @@
         {{peg.closing}}
       </el-collapse-item>
       <el-collapse-item title="日付" name="11">
-        {{[peg.sign_date["year"], peg.sign_date["month"], peg.sign_date["day"]].join("")}}
+        {{ (peg.sign_date)? [peg.sign_date["year"], peg.sign_date["month"], peg.sign_date["day"]].join(""): "" }}
+        
       </el-collapse-item>
       <el-collapse-item title="署名(記名)　押印欄" name="12">
         {{peg.signature}}
