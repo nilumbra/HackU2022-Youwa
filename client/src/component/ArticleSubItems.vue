@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-tree :data="treeData" :props="defaultProps" :indent="0" @node-click="handleNodeClick">
-      <span class="span-ellipsis" slot-scope="{node, data}">
+      <span class="span-ellipsis" slot-scope="{node}">
         <span :title="node.label"> {{node.label}} </span>
       </span>
     </el-tree>

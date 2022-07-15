@@ -7,12 +7,16 @@
       </el-collapse-item>
       <!-- 項目 -->
       <template v-for="({ article }, index) in peg.articles" > 
-        <!-- list-rendering -->
+        
         <el-collapse-item 
         v-if="Array.isArray(article.article_body)"
         :title="`${(index+1) + ' ' + article.article_header}`" :name="index+2" 
-        :key="article.article_num" disabled>
-          {{article.article_body}}
+        :key="article.article_num">
+          <!-- When article_body is Array  -->
+          <div >
+            <clause-items :data="article.article_body"></clause-items>
+          </div>
+          <!-- {{article.article_body}} -->
         </el-collapse-item>
         <el-collapse-item 
         v-else-if="article.article_body !== 'undefined'"   
@@ -66,23 +70,15 @@
 <script>
   import MarkedText from './MarkedText.vue';
   import ArticleSubItems from './ArticleSubItems.vue';
+  import ClauseItems from './ClauseItems.vue';
+
   export default {
     components: {
       MarkedText,
-      ArticleSubItems
+      ArticleSubItems,
+      ClauseItems
     },
-    created(){
-      const log = console.log;
-      const peg = this.$store.state.contractPEGTree;
-      
-      // use the data structure in $store.state.contractPEGTree
-      // Append el-collapse-item to the root node
-      // this.$el.appendChild(this.$refs.collapse.$el);
-      // log(JSON.stringify(peg, null, 2));
-      // for (const prop in peg) {
-      //   log(prop)
-      // }
-    },
+
     computed: {
       peg() {
         return this.$store.state.contractPEGTree
@@ -90,7 +86,7 @@
     }, 
     data() {
       return {
-        activeNames: ['1']
+        activeNames: []
       };
     },
     methods: {

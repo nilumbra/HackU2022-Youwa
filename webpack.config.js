@@ -6,7 +6,7 @@ const { VueLoaderPlugin } = require('vue-loader');
 module.exports = {
   mode: 'development',
   entry: { 
-    main: './client/main.js',
+    // main: './client/main.js',
     acc: './client/src/main.js'
   }, 
   plugins: [

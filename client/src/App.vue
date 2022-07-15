@@ -94,5 +94,89 @@ export default {
 </script>
 
 <style>
-
+textarea:focus {
+    border: 3px solid lightblue;
+}
+::placeholder {
+    color: #919191;
+}
+.outputText {
+    width: 470px;
+    height: 520px;
+    border: 3px solid #fff;
+    border-radius: 40px;
+    background-color: #F7F7F7;
+    padding: 24px;
+}
+.btnParent {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+.btn {
+    width: 240px;
+    height: 64px;
+    border-radius: 16px;
+    font-size: 22px;
+    font-weight: 400;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+.btn :hover {
+    background-color: #444;
+}
+/* radio button style */
+.headerMenu h4 {
+    font-size: 24px;
+    font-weight: 400;
+    color: #666;
+    text-align: right;
+}
+label {
+    position: relative;
+    cursor: pointer;
+    padding-left: 60px;
+    font-size: 20px;
+}
+label::before,
+label::after {
+    content: “”;
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+}
+label::before {
+    background-color: #fff;
+    border: 2px solid #777;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    left: 25px;
+}
+label::after {
+    background-color: #000;
+    border-radius: 50%;
+    opacity: 0;
+    width: 16px;
+    height: 16px;
+    left: 29px
+}
+input:checked + label::after {
+    opacity: 1;
+}
+.visually-hidden {
+   position: absolute !important; 
+   white-space: nowrap !important;
+   border: 0 !important;
+   clip: rect(0 0 0 0) !important;
+   clip-path: inset(50%) !important;
+   overflow: hidden !important;
+   height: 1px !important;
+   width: 1px !important;
+   margin: -1px !important;
+   padding: 0 !important;
+}
 </style>
