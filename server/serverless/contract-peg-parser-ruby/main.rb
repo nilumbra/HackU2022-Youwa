@@ -147,10 +147,11 @@ class ContractParser < Parslet::Parser
   # 署名欄
   rule(:signature) { empty_lines? >> spaces? >> any.repeat.as('signature') }
 
-  # rule(:eof) { any.absent? }
+  rule(:eof) { any.absent? }
 
   # 契約書全体
   rule(:contract) { title >> premises >> (articles | chapters) >> closing? >> sign_date >> signature }
+  # rule(:contract) { title >> premises >> (articles | chapters) }
 
   root(:contract)
 end

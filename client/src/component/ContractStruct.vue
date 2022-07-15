@@ -1,7 +1,7 @@
 <template>
   <div v-if="pegIsLoaded()">
-    <h3>{{peg.title}}</h3>
-    <el-collapse v-model="activeNames" @change="handleChange">
+    <!-- <h3 v-if="" class="contractTitle">{{peg.title}}</h3> -->
+    <el-collapse v-model="activeNames" @change="handleChange" accordion> 
       <el-collapse-item title="前文" name="1">
         {{peg.premises}}
       </el-collapse-item>
@@ -13,7 +13,7 @@
         :title="`${(index+1) + ' ' + article.article_header}`" :name="index+2" 
         :key="article.article_num">
           <!-- When article_body is Array  -->
-          <div >
+          <div class="clause-items-container">
             <clause-items :data="article.article_body"></clause-items>
           </div>
           <!-- {{article.article_body}} -->
@@ -102,3 +102,66 @@
     }
   }
 </script>
+
+<style>
+.clause-items-container {
+  transform: translateX(20px);
+}
+
+.el-collapse-item__header {
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
+.el-collapse-item__content {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>

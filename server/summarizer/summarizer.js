@@ -108,9 +108,7 @@ async function summarize(preprocessed) {
   var summarized = preprocessed;
   return new Promise((resolve, reject) => {
     // Mock API summarize latency
-    setInterval( () => {
       resolve(JSON.stringify({ summarized }));
-    }, 1000)   
   })
 }
 

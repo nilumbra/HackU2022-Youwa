@@ -16,14 +16,7 @@
     </template> -->
   <!-- </el-collapse> -->
 </template>
-<style scoped>
-.span-ellipsis {
-  width:100%;
-  overflow:hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-</style>
+
 <script>
 
 export default {
