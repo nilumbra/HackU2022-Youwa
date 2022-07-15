@@ -95,6 +95,10 @@ header {
     flex-direction: row;
     justify-content: space-between;
 }
+
+.inputArea {
+    position:relative;
+}
 textarea {
     width: 470px;
     height: 520px;
@@ -166,7 +170,7 @@ box-shadow: 0 0 1px rgba(255, 255, 255, .5);
     color: #666;
     text-align: right;
 }
-label {
+.readerRadio {
     position: relative;
     cursor: pointer;
     padding-left: 60px;
@@ -181,7 +185,7 @@ label::after {
     transform: translateY(-50%);
     top: 50%;
 }
-label::before {
+.readerRadio::before {
     background-color: #fff;
     border: 2px solid #777;
     border-radius: 50%;
@@ -189,7 +193,7 @@ label::before {
     height: 24px;
     left: 25px;
 }
-label::after {
+.readerRadio::after {
     background-color: #000;
     border-radius: 50%;
     opacity: 0;
@@ -212,3 +216,4 @@ input:checked + label::after {
    margin: -1px;
    padding: 0;
 }
+

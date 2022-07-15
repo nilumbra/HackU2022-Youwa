@@ -32,6 +32,7 @@
             <option value="nondisclosure">秘密保持</option>
             <option value="engagement">委任</option>
           </select><br><br> -->
+            <span @click="clearTextArea" class="textDelete"> ✖️ </span>
             <textarea ref="contractText" id="contractText" name="contractText" :placeholder="placeholder" v-model="contractText" rows="24" cols="48"></textarea>
           </form>
         </div>
@@ -41,8 +42,16 @@
           <contract-struct></contract-struct>
         </div>
       </div>
-      <div class="btnParent">
-        <button form="input" @click="onSubmit" type="submit" class="btn">要約する</button>
+      <div class="btnParent"> 
+        <template v-if="isTextAreaEmplty">
+          <label id="fileUploadButtonLabel" class="file-upload-button" for="file-upload-button" @click="uploadHandler">wordから要約</label>
+          <input name="file-upload-button" ref="fileUploadButton" id="fileUploadButton" class="file-upload-button-input" type="file"
+          @change="fileChangeHandler"
+          >
+        </template>
+        <template v-else>
+          <button form="input" @click="onSubmit" type="submit" class="btn">要約する</button>
+        </template>
       </div>
     </main>
   </div>
@@ -51,7 +60,33 @@
       <contract-struct></contract-struct> -->
 </template>
 <style scoped>
-  .contractTitle{
+  .textDelete {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 1em;
+    height: 1em;
+    color: rgb(225, 225, 225);
+    /* background-color: #fff; */
+    /* border-radius: 50%; */
+    /* border: 1px solid #000; */
+    font-size: 1.5em;
+    font-weight: 100;
+    text-align: center;
+    line-height: 1em;
+    opacity: 0.3;
+    cursor: pointer;
+  }
+
+  .textDelete:hover {
+    opacity: 0.5;
+  }
+
+  .textDelete:active {
+    opacity: 0.8;
+  }
+
+  .contractTitle {
     background-color:#fff;
     position: sticky;
     width:100%;
@@ -62,12 +97,35 @@
     /* padding: 2em; */
     /* left: 50%; */
     /* transform: translateX(-50%); */
-}
+  }
+
+  .file-upload-button {
+    display: block;
+    width: 240px;
+    height: 64px;
+    border-radius: 16px;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 64px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .file-upload-button:hover {
+      background-color: #444;
+  }
+
+  .file-upload-button-input {
+      display: none;
+  }
 </style>
 <script>
 // import ContractInput from './component/ContractInput.vue';
 import ContractStruct from './component/ContractStruct.vue';
 import http from './services/http.js';
+import { docx2txt } from './services/converter.js';
 
 export default {
   components: {
@@ -76,7 +134,10 @@ export default {
   computed: {
       peg() {
         return this.$store.state.contractPEGTree
-      }
+      }, 
+      isTextAreaEmplty() {
+        return this.contractText === ""
+      },
     }, 
   data() {
     return {
@@ -85,15 +146,11 @@ export default {
       picked: "1",
     }
   }, 
-  mounted() {
-    // console.log(this.$refs.contractText)
-    // this.$refs.contractText.value = this.$store.state.sample;
-  }, 
   watch: {
     picked(newVal, oldVal) {
       console.log(`newVal: ${newVal}, oldVal: ${oldVal}`)
       this.$store.state.reader = parseInt(newVal)
-    }
+    },
   }, 
   methods: {
     onSubmit() {
@@ -116,6 +173,42 @@ export default {
               duration: 2000
             });
           })
+    }, 
+    clearTextArea() {
+      this.contractText = "";
+    },
+    uploadHandler() {
+        this.$refs.fileUploadButton.click();
+    },
+    // On file load, POST /post
+    fileChangeHandler(e) {
+      var file = e.target.files[0];
+      if (file && file.name.match(/\.docx$/i)) {
+          docx2txt(file, (txt) => {
+            this.contractText = txt.trim();
+            // console.info(txt);
+            http.postContractForm({contractText: this.contractText})
+              .then((json_str) => {
+              // console.log(JSON.parse(json_str));
+              const pojo = JSON.parse(json_str)
+              const summarized = JSON.parse(pojo['summarized']);
+              console.log("Without parse " + typeof(summarized));
+              console.log(summarized)
+              this.$store.state.contractPEGTree = summarized;
+              this.$message({
+                message: '契約書を解析しました',
+                type: 'success',
+                duration: 2000
+              });
+            }).catch(err => {
+              this.$message({
+                message: '入力していただいた契約書を解析できませんでした',
+                type: 'error',
+                duration: 2000
+              });
+            })
+        });
+      }
     }
   }
 }

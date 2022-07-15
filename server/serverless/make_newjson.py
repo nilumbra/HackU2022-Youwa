@@ -1,6 +1,7 @@
 import collections
 from collections import OrderedDict
 import json
+import sys 
 
 TEXTS = ["甲", "乙"]
 def main():
@@ -9,8 +10,14 @@ def main():
 
     input_json = input()
     json_load = json.loads(input_json, object_pairs_hook=collections.OrderedDict)
-    json_search(json_load)
-    print(json.dumps(json_load, ensure_ascii=False))
+    
+    try:
+        json_search(json_load)
+        print(json.dumps(json_load, ensure_ascii=False))
+        sys.exit(0)
+    except(Exception):
+        print(Exception)
+        sys.exit(1)
 
     # with open(input_file, "r") as f:
     #     json_load = json.load(f, object_pairs_hook=collections.OrderedDict)
