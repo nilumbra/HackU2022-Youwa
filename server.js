@@ -32,6 +32,7 @@ app.post('/post', (req, res) => {
   })
   .catch(err => {
     log(err)
+    res.status(500).json({error: err})
   })
 })
 

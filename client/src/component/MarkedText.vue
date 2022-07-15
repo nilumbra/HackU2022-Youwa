@@ -1,11 +1,29 @@
 <template>
   <div>
-    <span v-if="isKou">(甲)</span>
-    <span v-if="isOtsu">(乙)</span>
+    <!-- 甲 -->
+    <span class="readerMark kou" v-if="isKou"></span>
+    <!-- 乙 -->
+    <span class="readerMark otsu" v-if="isOtsu"></span>
     <span>{{text}}</span>
   </div>
 </template>
+<style scoped>
+span.readerMark {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
+}
 
+span.kou {
+  background-color:blueviolet;
+}
+
+span.otsu {
+  background-color: yellowgreen;
+}
+
+</style>
 <script>
 export default {
   name: 'MarkedText',

@@ -1,13 +1,55 @@
 <template>
-  <div>
+  <div v-if="pegIsLoaded()">
     <h3>{{peg.title}}</h3>
     <el-collapse v-model="activeNames" @change="handleChange">
       <el-collapse-item title="前文" name="1">
         {{peg.premises}}
       </el-collapse-item>
-      <el-collapse-item title="Consistency" name="2">
-        <marked-text text="秘密保持契約書" :hlFlag="[0, 1]"></marked-text>
-      </el-collapse-item>
+      <!-- 項目 -->
+      <template v-for="({ article }, index) in peg.articles" > 
+        <!-- list-rendering -->
+        <el-collapse-item 
+        v-if="Array.isArray(article.article_body)"
+        :title="`${(index+1) + ' ' + article.article_header}`" :name="index+2" 
+        :key="article.article_num" disabled>
+          {{article.article_body}}
+        </el-collapse-item>
+        <el-collapse-item 
+        v-else-if="article.article_body !== 'undefined'"   
+        :title="`${(index+1) + ' ' + article.article_header}`" :name="index+2" :key="article.article_num">
+          <template v-if="article.article_body">
+            <template v-if="Array.isArray(article.article_body.clause_body)">
+              <marked-text 
+              :text="article.article_body.clause_body[0].clause_text" 
+              :hlFlag="article.article_body.clause_body[0].flag"> 
+             </marked-text>
+             <!-- {{article.article_body.clause_body.slice(1)}} -->
+              <article-sub-items :data="article.article_body.clause_body.slice(1)">
+              </article-sub-items>
+            </template>
+            <template v-else>
+              <marked-text
+              :text="article.article_body.clause_body.clause_text"
+              :hlFlag="article.article_body.clause_body.flag">
+              </marked-text>
+            </template>
+          </template> 
+
+          <template v-else>
+            <p>{{ article.clause }}</p>
+          </template>
+          <!-- {{article.article_body ? article.article_body.clause_body : article.clause }} -->
+         
+          <!-- .clause_body[0].clause_text -->
+          <!-- :hlFlag="article.article_body.clause_body[0].flag" -->
+
+            <!-- "article.article_body.clause_body.clause_text" -->
+            <!-- :hlFlag="article.article_body.clause_body.flag" -->
+        </el-collapse-item>
+       
+      </template>
+    
+      <!-- 項目 -->
       <el-collapse-item title="後文" name="10">
         {{peg.closing}}
       </el-collapse-item>
@@ -23,21 +65,23 @@
 </template>
 <script>
   import MarkedText from './MarkedText.vue';
-
+  import ArticleSubItems from './ArticleSubItems.vue';
   export default {
     components: {
       MarkedText,
+      ArticleSubItems
     },
     created(){
       const log = console.log;
       const peg = this.$store.state.contractPEGTree;
+      
       // use the data structure in $store.state.contractPEGTree
       // Append el-collapse-item to the root node
       // this.$el.appendChild(this.$refs.collapse.$el);
-      log(JSON.stringify(peg, null, 2));
-      for (const prop in peg) {
-        log(prop)
-      }
+      // log(JSON.stringify(peg, null, 2));
+      // for (const prop in peg) {
+      //   log(prop)
+      // }
     },
     computed: {
       peg() {
@@ -52,7 +96,13 @@
     methods: {
       handleChange(val) {
         console.log(val);
-      }
+      },
+      pegIsLoaded() {
+        if (!(this.$store.state.contractPEGTree.title !== "")) {
+          console.log("Peg is not loaded!!");
+        }
+        return this.$store.state.contractPEGTree.title !== ""
+      },
     }
   }
 </script>
