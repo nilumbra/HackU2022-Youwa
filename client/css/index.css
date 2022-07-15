@@ -149,7 +149,8 @@ box-shadow: 0 0 1px rgba(255, 255, 255, .5);
     width: 240px;
     height: 64px;
     border-radius: 16px;
-    font-size: medium;
+    font-size: 22px;
+    font-weight: 400;
     background-color: black;
     color: white;
     text-align: center;
@@ -176,8 +177,8 @@ box-shadow: 0 0 1px rgba(255, 255, 255, .5);
     padding-left: 60px;
     font-size: 20px;
 }
-label::before,
-label::after {
+.readerRadio::before,
+.readerRadio::after {
     content: "";
     display: block;
     border-radius: 50%;

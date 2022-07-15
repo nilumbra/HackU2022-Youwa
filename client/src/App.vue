@@ -9,11 +9,11 @@
         <h4> ハイライト　</h4>
         <div>
           <input class="visually-hidden" id="kou" type="radio" name="reader" value="0" v-model="picked">
-          <label for="kou">甲</label> 
+          <label class="readerRadio" for="kou">甲</label> 
           <input class="visually-hidden" id="otsu" type="radio" name="reader" value="1" v-model="picked">
-          <label for="otsu">乙</label>
+          <label class="readerRadio" for="otsu">乙</label>
           <input class="visually-hidden" id="both" type="radio" name="reader" value="3" v-model="picked">
-          <label for="both">両方</label>
+          <label class="readerRadio" for="both">両方</label>
         </div>
         <!-- <li>要約</li>
         <li>保存済み</li>
@@ -44,7 +44,9 @@
       </div>
       <div class="btnParent"> 
         <template v-if="isTextAreaEmplty">
-          <label id="fileUploadButtonLabel" class="file-upload-button" for="file-upload-button" @click="uploadHandler">wordから要約</label>
+          <label id="fileUploadButtonLabel" class="file-upload-button" for="file-upload-button" @click="uploadHandler">
+            Wordから要約 <i class="el-icon-upload2"></i> 
+          </label>
           <input name="file-upload-button" ref="fileUploadButton" id="fileUploadButton" class="file-upload-button-input" type="file"
           @change="fileChangeHandler"
           >
