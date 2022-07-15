@@ -204,7 +204,7 @@ input:checked + label::after {
    position: absolute;
    white-space: nowrap;
    border: 0;
-   clip: rect(0 0 0 0);
+   clip: rect(0 class="visually-hidden" 0 0 0);
    clip-path: inset(50%);
    overflow: hidden;
    height: 1px;
