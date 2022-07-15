@@ -8,11 +8,11 @@
       <div class="headerMenu">
         <h4> ハイライト　</h4>
         <div>
-          <input id="kou" type="radio" name="reader" value="0" v-model="picked">
+          <input class="visually-hidden" id="kou" type="radio" name="reader" value="0" v-model="picked">
           <label for="kou">甲</label> 
-          <input id="otsu" type="radio" name="reader" value="1" v-model="picked">
+          <input class="visually-hidden" id="otsu" type="radio" name="reader" value="1" v-model="picked">
           <label for="otsu">乙</label>
-          <input id="both" type="radio" name="reader" value="2" v-model="picked">
+          <input class="visually-hidden" id="both" type="radio" name="reader" value="3" v-model="picked">
           <label for="both">両方</label>
         </div>
         <!-- <li>要約</li>

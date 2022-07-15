@@ -172,9 +172,9 @@ label {
     padding-left: 60px;
     font-size: 20px;
 }
-/* label::before,
+label::before,
 label::after {
-    content: “”;
+    content: "";
     display: block;
     border-radius: 50%;
     position: absolute;
@@ -199,7 +199,7 @@ label::after {
 }
 input:checked + label::after {
     opacity: 1;
-} */
+}
 .visually-hidden {
    position: absolute;
    white-space: nowrap;
