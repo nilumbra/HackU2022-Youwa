@@ -162,10 +162,13 @@ data = $stdin.read
 begin
   cp = ContractParser.new
   # puts "Ruby version: #{RUBY_VERSION}"
-  pp cp.parse(data).to_json
+  pp cp.parse(data).to_json  
+  exit(true)
+
   #pp cp.parse data
 rescue Parslet::ParseFailed => error
   puts error.parse_failure_cause.ascii_tree
+  exit(false)
 end
 
 # グラフを描画する場合にはコメントイン

@@ -21,7 +21,6 @@ app.get('/', (req, res) => {
 
 app.post('/post', (req, res) => {
   const {contractType, contractText} = req.body;
-
   /* Ignore <contractType> for prototyping purpose */
   preprocess_text(contractText)
   .then( // Mock preprocess text
