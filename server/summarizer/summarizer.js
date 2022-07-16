@@ -40,7 +40,8 @@ async function preprocess_text(raw_text) {
     peg_process.stdout.setEncoding('utf8');
     peg_process.stdout.on('data', (data) => {
       res.push(data);
-      console.log(`Appending preprocessed result(contract-peg-parser-ruby/main.rb): ${data.slice(0, 20)}\n`);
+      console.log(`Appending preprocessed result(contract-peg-parser-ruby/main.rb): ${data}\n`);
+
     });
 
     // On error, call reject
