@@ -32,7 +32,7 @@
             <option value="nondisclosure">秘密保持</option>
             <option value="engagement">委任</option>
           </select><br><br> -->
-            <span @click="clearTextArea" class="textDelete"> ✖️ </span>
+            <span @click="clearTextArea" class="textDelete">×</span>
             <textarea ref="contractText" id="contractText" name="contractText" :placeholder="placeholder" v-model="contractText" rows="24" cols="48"></textarea>
           </form>
         </div>
@@ -68,7 +68,7 @@
     right: 10px;
     width: 1em;
     height: 1em;
-    color: rgb(225, 225, 225);
+    color: #444;
     /* background-color: #fff; */
     /* border-radius: 50%; */
     /* border: 1px solid #000; */
