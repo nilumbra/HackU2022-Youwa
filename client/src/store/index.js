@@ -8,7 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     reader: 0,
-    contractPEGTree: data,
-    sample: text,
+    contractPEGTree: {},
+    sample: "",
   }
 })

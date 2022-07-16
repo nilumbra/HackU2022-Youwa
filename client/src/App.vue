@@ -198,12 +198,14 @@ export default {
               console.log(summarized)
               this.$store.state.contractPEGTree = summarized;
               this.$message({
+                showClose: true,
                 message: '契約書を解析しました',
                 type: 'success',
                 duration: 2000
               });
             }).catch(err => {
               this.$message({
+                showClose: true,
                 message: '入力していただいた契約書を解析できませんでした',
                 type: 'error',
                 duration: 2000

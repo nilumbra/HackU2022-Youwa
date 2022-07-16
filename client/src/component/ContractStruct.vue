@@ -95,10 +95,10 @@
         console.log(val);
       },
       pegIsLoaded() {
-        if (!(this.$store.state.contractPEGTree.title !== "")) {
+        if (!(this.$store.state.contractPEGTree.title !== undefined)) {
           console.log("Peg is not loaded!!");
         }
-        return this.$store.state.contractPEGTree.title !== ""
+        return this.$store.state.contractPEGTree.title !== undefined
       },
     }
   }
