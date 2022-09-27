@@ -1,14 +1,12 @@
 # 要は
 
 # Build 
-Run `npm run build`
+`npm run build`
 
 ## Development
-Use `npm run test` to fire up a nodemon server for development
-Use `npm run production` to fire up a server for production test
+`npm run test` to fire up a nodemon server for development 
 
-git 
-
+`npm run production` to fire up a server for production test
 ## Project structure
 ```
 root/
