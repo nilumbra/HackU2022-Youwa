@@ -124,10 +124,10 @@
   }
 </style>
 <script>
-// import ContractInput from './component/ContractInput.vue';
-import ContractStruct from './component/ContractStruct.vue';
-import http from './services/http.js';
-import { docx2txt } from './services/converter.js';
+// import ContractInput from './components/ContractInput.vue';
+import ContractStruct from './components/ContractStruct.vue';
+import http from './utils/http.js';
+import { docx2txt } from './utils/converter.js';
 
 export default {
   components: {
