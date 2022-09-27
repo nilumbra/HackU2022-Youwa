@@ -1,0 +1,220 @@
+/** The new CSS reset - version 1.5.1 (last updated 1.3.2022) **/
+*:where(
+:not(iframe,canvas,img,svg,video) 
+:not(svg *,symbol *)
+:not(input)
+){
+    all:unset;
+    display:revert
+} 
+
+
+*,*::before,*::after{ 
+    box-sizing:border-box
+} */
+
+a,button {
+    cursor:revert
+}
+ol,ul,menu {
+    list-style:none
+}
+img {
+    max-width:100%
+}
+table {
+    border-collapse:collapse
+}
+textarea {
+    -ms-overflow-style: none;    /* IE, Edge 対応 */
+    scrollbar-width: none;       /* Firefox 対応 */
+    white-space:revert
+}
+
+textarea::-webkit-scrollbar {  /* Chrome, Safari 対応 */
+    display:none;
+} 
+meter {
+    -webkit-appearance:revert;appearance:revert
+}
+::placeholder {
+    color:unset
+}
+:where([hidden]){
+    display:none
+}
+:where([contenteditable]){
+    -moz-user-modify:read-write;
+    -webkit-user-modify:read-write;
+    overflow-wrap:break-word;
+    -webkit-line-break:after-white-space
+}
+:where([draggable="true"]){
+    -webkit-user-drag:element
+}
+
+/* General style */
+body {
+    margin: 0px auto;
+    font-family: sans-serif;
+    width: 960px;
+}
+
+h1 {
+    font-size: 70px;
+    font-weight: 900;
+}
+
+li {
+    display: inline;
+    text-decoration: none;
+}
+
+/* each style */
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+}
+.headerTitle p {
+    color: gray;
+}
+.headerMenu li {
+    color: gray;
+    font-size: 24px;
+    margin-left: 32px;
+}
+.headerMenu div {
+    display:block;
+}
+.content {
+    margin-top: 56px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.inputArea {
+    position:relative;
+}
+textarea {
+    width: 470px;
+    height: 520px;
+    border-radius: 20px;
+    background-color: #f7f7f7;
+    /* border: 3px solid #ccc; */
+    padding: 24px;
+}
+/*textarea:hover {
+    border: 3px solid #ccc;
+}*/
+textarea:focus {
+    border: 3px solid lightblue;
+}
+::placeholder {
+    color: #919191;
+}
+.outputText {
+    position: relative;
+    width: 470px;
+    height: 520px;
+    border: 2px solid #F1EEEE;
+    border-radius: 20px;
+    background-color: #fff;
+    /* padding: 24px; */
+    overflow-y: scroll;
+    -ms-overflow-style: none;    /* IE, Edge 対応 */
+    scrollbar-width: none;       /* Firefox 対応 */
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+  }
+  
+::-webkit-scrollbar-thumb {
+border-radius: 4px;
+background-color: rgba(0, 0, 0, .5);
+box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+.btnParent {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+.btn {
+    width: 240px;
+    height: 64px;
+    border-radius: 16px;
+    font-size: 22px;
+    font-weight: 400;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: rgb(90, 90, 90);
+} 
+.btn:active {
+  background-color: rgb(150, 150, 150);
+  color: black
+}
+
+/* radio button style */
+.headerMenu h4 {
+    font-size: 24px;
+    font-weight: 400;
+    color: #666;
+    text-align: right;
+}
+.readerRadio {
+    position: relative;
+    cursor: pointer;
+    padding-left: 60px;
+    font-size: 20px;
+}
+.readerRadio::before,
+.readerRadio::after {
+    content: "";
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+}
+.readerRadio::before {
+    background-color: #fff;
+    border: 2px solid #777;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    left: 25px;
+}
+.readerRadio::after {
+    background-color: #000;
+    border-radius: 50%;
+    opacity: 0;
+    width: 16px;
+    height: 16px;
+    left: 29px  
+}
+input:checked + label::after {
+    opacity: 1;
+}
+.visually-hidden {
+   position: absolute;
+   white-space: nowrap;
+   border: 0;
+   clip: rect(0 class="visually-hidden" 0 0 0);
+   clip-path: inset(50%);
+   overflow: hidden;
+   height: 1px;
+   width: 1px;
+   margin: -1px;
+   padding: 0;
+}
+

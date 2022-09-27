@@ -1,5 +1,5 @@
-# puts($LOAD_PATH)
-$LOAD_PATH.unshift('/home/vagrant/youwa/serverless/contract-peg-parser-ruby/vendor/bundle/ruby/3.0.0/gems/parslet-1.8.2/lib')
+require 'pathname'
+$LOAD_PATH.unshift(Pathname.new(__dir__).join("vendor/bundle/ruby/3.0.0/gems/parslet-1.8.2/lib").to_s)
 $LOAD_PATH.unshift('/usr/share/rubygems-integration/all/gems/bundler-2.3.5/lib/gems/bundler-2.3.5/lib')
 # puts($LOAD_PATH)
 require 'bundler/setup'
@@ -147,10 +147,10 @@ class ContractParser < Parslet::Parser
   # 署名欄
   rule(:signature) { empty_lines? >> spaces? >> any.repeat.as('signature') }
 
-  # rule(:eof) { any.absent? }
+  rule(:eof) { any.absent? }
 
   # 契約書全体
-  rule(:contract) { title >> premises >> (articles | chapters) >> closing? >> sign_date >> signature }
+  rule(:contract) { title >> premises >> (articles | chapters) >> closing? >> sign_date.maybe >> signature.maybe }
 
   root(:contract)
 end
@@ -162,10 +162,13 @@ data = $stdin.read
 begin
   cp = ContractParser.new
   # puts "Ruby version: #{RUBY_VERSION}"
-  pp cp.parse(data).to_json
+  pp cp.parse(data).to_json  
+  exit(true)
+
   #pp cp.parse data
 rescue Parslet::ParseFailed => error
   puts error.parse_failure_cause.ascii_tree
+  exit(false)
 end
 
 # グラフを描画する場合にはコメントイン

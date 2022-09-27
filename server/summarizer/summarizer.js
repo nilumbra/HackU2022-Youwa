@@ -40,43 +40,50 @@ async function preprocess_text(raw_text) {
     peg_process.stdout.setEncoding('utf8');
     peg_process.stdout.on('data', (data) => {
       res.push(data);
-      console.log(`Appending preprocessed result(peg): ${data.slice(0, 20)}\n`);
+      console.log(`Appending preprocessed result(contract-peg-parser-ruby/main.rb): ${data}\n`);
+
     });
 
     // On error, call reject
     peg_process.stderr.setEncoding('utf8');
     peg_process.stderr.on('data', (err) => {
         reject(err)
-        console.error(`Preprocess error(peg): ${err}`);
+        console.error(`Preprocess error(contract-peg-parser-ruby/main.rb): ${err}`);
     })
 
     // When PEG parser exit, pass it to addFlag for further process
     peg_process.on('exit', (code) => {
         const result = res.join('');
         res = [];
+        console.log(code)
         if (code != 0) {
           console.log(`ruby peg parser exited with code ${code}`);
+          reject("Error in Ruby PEG Parser")
         } 
 
         console.log(`PEG parser terminates as expected :)\nResult:\n${result.slice(0, 50)}`);
 
         // Pass parsed contract to addFlag for highlight marking
-        addFlag_process.stdin.setEncoding('utf8');
-        addFlag_process.stdin.write(JSON.parse(result)); // Expects to be valid JSON
-        addFlag_process.stdin.end();
+        try {
+          addFlag_process.stdin.setEncoding('utf8');
+          addFlag_process.stdin.write(JSON.parse(result)); // Expects to be valid JSON
+          addFlag_process.stdin.end();
+        } catch(err) {
+          console.log(err)
+        }
     })
 
     // On outcoming data, Caching preprocess result
     addFlag_process.stdout.on('data', (data) => {
       res.push(data);
-      console.log(`Appending preprocessed result(addFlag): ${data.slice(0, 20)}\n`);
+      console.log(`Appending preprocessed result(make_newjson.py): ${data.slice(0, 20)}\n`);
     })
 
     // On error, call reject
     peg_process.stderr.setEncoding('utf8');
     addFlag_process.stderr.on('data', (err) => {
       reject(err)
-      console.error(`Preprocess error(addFlag): ${err}`);
+      console.error(`Preprocess error(make_newjson.py): ${err}`);
   })
 
     // call resolve
@@ -84,9 +91,10 @@ async function preprocess_text(raw_text) {
       const result = res.join('');
       if (code != 0) {
         console.log(`make_newjson.py exited with code ${code}`);
+        reject("Error in make_newjson.py!!")
       } else {
         console.log(`Flags have been added :)`);
-        console.log(`Preprocessing terminates successfully :)\nResult:\n${result}`);
+        // console.log(`Preprocessing terminates successfully :)\nResult:\n${result}`);
         resolve(result)
       }
     })
@@ -108,9 +116,7 @@ async function summarize(preprocessed) {
   var summarized = preprocessed;
   return new Promise((resolve, reject) => {
     // Mock API summarize latency
-    setInterval( () => {
       resolve(JSON.stringify({ summarized }));
-    }, 1000)   
   })
 }
 
@@ -129,7 +135,6 @@ async function addFlag(flagged) {
 
   spawn('python3', pyargs);
 }
-
 
 module.exports = {
   preprocess_text,

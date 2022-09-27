@@ -1,7 +1,3 @@
-const log = console.log;
-
-// Populating input textarea
-const contract_ta = document.getElementById("contractText");
 const text = 
 `秘密保持契約書
 
@@ -71,47 +67,4 @@ const text =
 代表取締役 　　　　　　　　　　　　　　印
 `
 
-contract_ta.value = text;
-var obj;
-
-// Define a reusable singleton XHR for every page load
-const xhr = new XMLHttpRequest();
-xhr.responseType = 'json';
-
-// Call a function when the state changes.
-xhr.onreadystatechange = function() { 
-
-  // On ‘success’, change view
-  if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-    // Update #summarized view here
-    const summarized = document.getElementById('summarized');
-    // console.log(typeof(xhr.response))
-    const summarizedData = JSON.parse(xhr.response);
-    // console.log(typeof(summarizedData))
-    obj = JSON.parse(summarizedData['summarized']);
-    console.log(JSON.stringify(obj, null, 2));
-    const summarizedTxt = JSON.stringify(obj, null, 2);
-    summarized.textContent = summarizedTxt;
-    alert('要約をご覧ください');
-  }  
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  var form = document.getElementById('input');
-  // var submitBtn = document.getElementById('submit');
-  // submitBtn.addEventListener('click', () => {
-  //   form.submit();
-  // })
-
-  // XHRHttpRequest.send() on submit
-  form.addEventListener('submit', function(e){
-    e.preventDefault();  
-
-    xhr.open("POST", this.getAttribute('action'));
-
-    var formObj = Object.fromEntries(new FormData(this)); 
-    // log(obj)
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify(formObj));
-  })
-})
+export { text };

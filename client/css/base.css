@@ -1,0 +1,14 @@
+.span-ellipsis {
+  width:100%;
+  overflow:hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+el-collapse {
+  padding:20px !important;
+}
+
+el-collapse-item {
+  padding:20px !important;
+}
